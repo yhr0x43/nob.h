@@ -241,7 +241,7 @@ int main(void)
 
     // Prefix/suffix check
     {
-        ASSERT_TRUE(nob_sv_start_with(SV("Hello, World"), "Hello"));
+        ASSERT_TRUE(nob_sv_starts_with(SV("Hello, World"), SV("Hello")));
         ASSERT_TRUE(nob_sv_end_with(SV("Hello, World"), "World"));
     }
 
