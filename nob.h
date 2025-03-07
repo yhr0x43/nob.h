@@ -534,7 +534,6 @@ Nob_String_View nob_sv_from_parts(const char *data, size_t count);
 Nob_String_View nob_sv_take_left_while(Nob_String_View sv, bool (*predicate)(char x));
 Nob_String_View nob_sv_chop_by_sv(Nob_String_View *sv, Nob_String_View thicc_delim);
 bool nob_sv_try_chop_by_delim(Nob_String_View *sv, char delim, Nob_String_View *chunk);
-Nob_String_View nob_sv_chop_left(Nob_String_View *sv, size_t n);
 Nob_String_View nob_sv_chop_right(Nob_String_View *sv, size_t n);
 Nob_String_View nob_sv_chop_left_while(Nob_String_View *sv, bool (*predicate)(char x));
 bool nob_sv_index_of(Nob_String_View sv, char c, size_t *index);
@@ -1676,19 +1675,6 @@ bool nob_sv_try_chop_by_delim(Nob_String_View *sv, char delim, Nob_String_View *
     return false;
 }
 
-Nob_String_View nob_sv_chop_left(Nob_String_View *sv, size_t n) {
-    if (n > sv->count) {
-        n = sv->count;
-    }
-
-    Nob_String_View result = nob_sv_from_parts(sv->data, n);
-
-    sv->data += n;
-    sv->count -= n;
-
-    return result;
-}
-
 Nob_String_View nob_sv_chop_right(Nob_String_View *sv, size_t n) {
     if (n > sv->count) {
         n = sv->count;
@@ -2018,7 +2004,6 @@ int closedir(DIR *dirp)
         #define String_View Nob_String_View
         #define temp_sv_to_cstr nob_temp_sv_to_cstr
         #define sv_chop_by_delim nob_sv_chop_by_delim
-        #define sv_chop_left nob_sv_chop_left
         #define sv_trim nob_sv_trim
         #define sv_trim_left nob_sv_trim_left
         #define sv_trim_right nob_sv_trim_right
